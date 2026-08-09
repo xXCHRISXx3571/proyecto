@@ -1,0 +1,13 @@
+node_modules/
+.next/
+dist/
+build/
+coverage/
+.expo/
+.vercel/
+.env
+.env.*
+!.env.example
+*.zip
+*.log
+*.tsbuildinfo
