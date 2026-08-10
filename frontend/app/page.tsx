@@ -213,14 +213,12 @@ export default function Home() {
           />
         </div>
 
-        <div style={{ display: 'flex', gap: '15px' }}>
+        <div className="catalog-layout">
           
           <div
             style={{
-              width: '200px',
-              position: 'relative',
-              left: '350px',
-              top: '50px',
+              width: '220px',
+              flexShrink: 0,
               background: '#fff',
               padding: '15px',
               borderRadius: '10px',
@@ -336,8 +334,8 @@ export default function Home() {
             </button>
           </div>
 
-          <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-            <div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ width: '100%' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                 <span style={{ fontSize: '13px', color: '#fff' }}>
                   {filteredProducts.length} productos encontrados
@@ -359,7 +357,7 @@ export default function Home() {
                 </select>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 240px)', gap: '20px' }}>
+              <div className="products-grid">
                 {filteredProducts.map((p) => (
                   <div key={p._id} style={{ border: '1px solid #ccc', borderRadius: '12px', padding: '12px', background: '#fff', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
                     <img src={p.image || 'https://via.placeholder.com/300x200?text=Cafe'} alt={p.name} style={{ width: '100%', height: '300px', objectFit: 'cover', borderRadius: '8px', marginBottom: '8px' }} />
@@ -375,6 +373,33 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .catalog-layout {
+          display: flex;
+          align-items: flex-start;
+          gap: 24px;
+          width: min(100%, 1280px);
+          margin: 0 auto;
+        }
+
+        .products-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 20px;
+          width: 100%;
+        }
+
+        @media (max-width: 800px) {
+          .catalog-layout {
+            flex-direction: column;
+          }
+
+          .catalog-layout > :first-child {
+            width: 100% !important;
+          }
+        }
+      `}</style>
 
       {error && <p style={{ color: 'red', fontFamily: 'inherit', textAlign: 'center' }}>Error backend</p>}
     </div>
